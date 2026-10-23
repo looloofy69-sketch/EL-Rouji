@@ -14,7 +14,7 @@ declare module "@appdeploy/client" {
   export const image: {
     resizeIfNeeded(
       file: File,
-      options?: { maxDimension?: number; maxPixels?: number; quality?: number }
+      options?: { maxDimension?: number; maxPixels?: number; quality?: number; mimeType?: string }
     ): Promise<{ data: string; mimeType: string; bytes: number }>;
   };
 }
