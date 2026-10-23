@@ -1,0 +1,93 @@
+[
+  {
+    "name": "Send a prompt and render a formatted EL-Rouji answer",
+    "sanity": true,
+    "viewport": "desktop",
+    "covers": [
+      "AI chat request",
+      "assistant reply rendering",
+      "Markdown headings, lists and tables",
+      "connection status",
+      "primary chat workflow"
+    ],
+    "description": "Verifies the primary conversation path sends a valid prompt and renders the returned Markdown safely.",
+    "steps": [
+      "Open EL-Rouji and wait for the connection indicator to settle.",
+      "Ask for a short answer formatted with a heading and a three-row Markdown table.",
+      "Send the message and wait for the assistant response."
+    ],
+    "expected": "A non-empty answer appears with formatted Markdown elements rather than raw Markdown syntax."
+  },
+  {
+    "name": "Sign in and sync conversations to the account",
+    "viewport": "desktop",
+    "covers": [
+      "optional account sign-in",
+      "authenticated conversation API",
+      "cloud history sync",
+      "local/cloud merge"
+    ],
+    "description": "Verifies signing in merges local and cloud conversations and retains them after reload.",
+    "steps": [
+      "Create a conversation with a distinctive title using the chat composer.",
+      "Open Preferences and choose Sign in to sync.",
+      "Complete sign-in and wait for sync confirmation.",
+      "Reload EL-Rouji and verify the conversation remains available."
+    ],
+    "expected": "The account is marked connected and the conversation remains available in history after reload."
+  },
+  {
+    "name": "Research a question and show cited source links",
+    "viewport": "desktop",
+    "covers": [
+      "Tavily live search request",
+      "research synthesis",
+      "numbered source links",
+      "missing-key error state"
+    ],
+    "description": "Verifies research mode returns retrieved source cards and a synthesized answer.",
+    "steps": [
+      "Open Research mode from the workspace or Built-in Tools.",
+      "Ask a specific question about a current topic.",
+      "Wait for the answer and inspect the source cards beneath it."
+    ],
+    "expected": "When web search is configured and the provider accepts the key, the answer includes clickable source cards. Failures are surfaced instead of fabricated citations."
+  },
+  {
+    "name": "Analyze an image or a supported text file",
+    "viewport": "desktop",
+    "covers": [
+      "image resizing",
+      "image understanding endpoint",
+      "text document analysis endpoint",
+      "file size and type validation"
+    ],
+    "description": "Verifies supported attachments reach the correct analysis workflow.",
+    "steps": [
+      "Attach a small PNG/JPG/WebP image or TXT/MD/CSV/JSON file.",
+      "Enter a question about the attachment and submit.",
+      "Wait for EL-Rouji to return its analysis."
+    ],
+    "expected": "A response relevant to the uploaded file appears, or a visible file-analysis error is shown if the request fails."
+  },
+  {
+    "name": "Use built-in tools and the local calculator on mobile",
+    "viewport": "mobile",
+    "covers": [
+      "Built-in Tools navigation",
+      "Translator prompt preparation",
+      "local mathjs calculator",
+      "safe calculator validation",
+      "language selector",
+      "responsive toolbox"
+    ],
+    "description": "Verifies users can open the built-in tool hub, calculate locally, and prepare an AI-assisted translation prompt.",
+    "steps": [
+      "Open Built-in Tools from the workspace navigation.",
+      "Enter \"sqrt(81) + 4\" in Calculator and press Calculate.",
+      "Select Translator, choose Arabic as the target language, and use the tool.",
+      "Verify the chat composer is prefilled and no request was sent automatically."
+    ],
+    "expected": "The calculator returns 13 locally; Translator opens a prepared prompt in chat, and the user must explicitly send it."
+  }
+]
