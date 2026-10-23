@@ -1,22 +1,23 @@
 # EL-Rouji source sync
 
-Status: deployed source imported and repository CI checks established.
+Status: deployed source imported; repository CI setup complete; dependency-audit migration is in review.
 
 - Source app: `el-rouji-70120b`
 - Source snapshot: `1792755107550`
-- Target repository: https://github.com/looloofy69-sketch/EL-Rouji
+- Target repository: https://github.com/loolooofy69-sketch/EL-Rouji
 - Transferred source/config paths: `backend/index.ts`, `index.html`, `package.json`, `postcss.config.js`, `src/App.tsx`, `src/components/BuiltInTools.tsx`, `src/index.css`, `src/main.tsx`, `tailwind.config.js`, `tests/tests.json`, `tsconfig.json`, `vite.config.ts`.
-- Added repository files: documentation, security/contribution guidance, issue/PR templates, Dependabot, GitHub Actions CI, and a CI-only AppDeploy SDK shim.
-- Added `package-lock.json` from the CI runner and verified it with a successful `npm ci` workflow.
-- GitHub Actions run #38 succeeded: locked install, dependency-audit summary, TypeScript check, and Vite production bundle. The Vite step used the CI-only shim, not the hosted AppDeploy SDK.
-- Dependency remediation is tracked in https://github.com/looloofy69-sketch/EL-Rouji/issues/9.
+- Added repository docs, security/contribution guidance, issue/PR templates, Dependabot, and GitHub Actions CI.
+- The Tailwind CSS 3 dependency tree originally returned 7 npm audit findings (5 high, 2 moderate).
+- Tailwind CSS 4.3.3 migration trial in draft PR #10 completed: run #48 reported zero npm audit findings, and both typecheck and Vite build passed.
+- The current migration branch includes the new lockfile and CI has been switched back to `npm ci`; an additional locked-install run is needed to verify this exact final branch state.
 - No secret values were committed.
 
 ## Still outstanding
 
-- npm audit reported 7 advisories (5 high, 2 moderate) in the Tailwind CSS 3 build-tool dependency tree; see `docs/DEPENDENCY_AUDIT.md`.
+- Visual verification of the Tailwind 4 CSS migration at desktop/mobile widths and in Arabic RTL, English, and French before merge.
+- Re-run GitHub Actions after locking the final package tree.
 - End-to-end behavior of hosted research/search credentials has not been verified by this source-sync operation.
 - Hosted authentication, account isolation, conversation data retention/deletion, attachment handling, and production security controls still need dedicated testing.
 - No release tag has been created; the release checklist remains incomplete.
 
-The source synchronization did not change the live AppDeploy deployment.
+The source synchronization and migration trial did not change the live AppDeploy deployment.
