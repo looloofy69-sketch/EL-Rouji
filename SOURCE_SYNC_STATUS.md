@@ -19,7 +19,7 @@ Status: deployed source imported; repository CI established; AppDeploy-compatibl
 ## Still outstanding
 
 - Verify the production-only npm audit gate and GitHub Actions on this maintenance branch and its merge commit.
-- Full dependency-tree audit still reports 7 development/build-tool findings (5 high, 2 moderate); review and explicitly disposition them in issue #9.
+- Latest full dependency-tree audit run #63 reported 3 moderate development/build-tool findings; earlier run #38 reported 7 (5 high, 2 moderate). The production-only audit gate returned zero vulnerabilities. Review and explicitly disposition the full-tree findings in issue #9.
 - Complete hosted QA for research, auth/account isolation, history deletion, attachments and multilingual mobile/RTL rendering.
 - Review backend authorization, input validation, rate limiting, privacy/retention and rollback procedure.
 - No release tag has been created; the release checklist remains incomplete.
