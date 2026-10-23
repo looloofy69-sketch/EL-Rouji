@@ -16,7 +16,7 @@ The repository source was imported from AppDeploy snapshot `1792755107550` for a
 | Dependency lockfile | Verified | Committed `package-lock.json`; locked `npm ci` passes. |
 | TypeScript | Verified in candidate branch | GitHub Actions run #55 passed `npm run typecheck`. |
 | Frontend bundle | Verified in candidate branch | Run #55 Vite build passed using a CI-only `@appdeploy/client` shim. |
-| npm audit | Verified for candidate lockfile | Run #55 reported zero findings. Earlier Tailwind 3 tree reported 7 (5 high, 2 moderate). |
+| npm audit | Verified for candidate lockfile | Run #55 and the later strict-audit CI run reported zero findings. CI now fails on low-or-higher findings. Earlier Tailwind 3 tree reported 7 (5 high, 2 moderate). |
 | Tailwind 4 visual parity | Not verified | Desktop/mobile and Arabic RTL screenshots have not been compared. |
 | Hosted authentication/account sync | Not verified by this work | Requires live end-to-end testing with the real AppDeploy runtime. |
 | Research/Tavily end-to-end | Not verified by this work | A configured secret entry is not proof of a successful search request. |
