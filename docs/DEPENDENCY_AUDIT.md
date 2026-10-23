@@ -1,43 +1,45 @@
 # Dependency audit record
 
-**Current dependency baseline:** Tailwind CSS 3, PostCSS and Autoprefixer, matching the last-known-good hosted AppDeploy source snapshot.
+**Current baseline:** AppDeploy-compatible Tailwind CSS 3, PostCSS and Autoprefixer.
 
-## Observed full-tree result
+## Latest observed audit
 
-The October 23, 2026 CI audit reported **7 advisories: 5 high, 2 moderate, 0 critical** across the dependency tree. The reported paths are centered on build-time dependencies pulled in through Tailwind CSS 3: `braces`, `chokidar`, `fast-glob`, `micromatch`, `postcss-nested`, `postcss-selector-parser`, and the Tailwind package path itself.
+GitHub Actions run **#63** on October 23, 2026 reported **3 moderate, 0 high, 0 critical** advisories in the full dependency tree. The latest reported packages were:
 
-This is **not zero findings across the full dependency tree**. CI will keep printing the full audit summary. A separate hard CI gate now runs `npm audit --omit=dev --audit-level=low` so a new low-or-higher advisory in production dependencies fails CI.
+- `postcss-nested` (moderate; reported via `postcss-selector-parser`)
+- `postcss-selector-parser` (moderate)
+- `tailwindcss` (moderate; inherited via the two entries above)
 
-## Why Tailwind CSS 4 was not merged
+The production-only audit in the same run (`npm audit --omit=dev --audit-level=low`) returned **0 vulnerabilities** and passed the blocking CI step.
 
-Tailwind CSS 4.3.3 plus `@tailwindcss/postcss` produced a clean npm audit, TypeScript check and Vite bundle in GitHub Actions. But the real AppDeploy validator rejected `@import "tailwindcss";` and required the existing Tailwind 3 directives:
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-The attempted AppDeploy deployment was rolled back to last-known-good version `1792755107550`; status returned to `ready`. PR #10 was closed without merge. Its green GitHub build was therefore not evidence of AppDeploy compatibility.
+An earlier CI run (#38) reported 7 advisories (5 high, 2 moderate). The count and severity returned by npm's audit metadata can change as advisory feeds are updated even when the package lockfile does not change. Run #63 is the latest observed result for the current Tailwind 3 lockfile, not a claim that the full dependency tree has no findings.
 
 ## Findings and disposition
 
 | Finding | Current treatment |
 |---|---|
-| `braces` GHSA-vfj7-8cjw-p6xm / CVE-2026-93687 | The GitHub advisory lists versions through 3.0.3 as affected and no patched version. It concerns deeply nested brace patterns and stack exhaustion. The upstream maintainer disputes the assessment and argues the documented input-length bound limits the claimed depth. Keep this as an unresolved build-tool advisory rather than calling it fixed. |
-| `postcss-selector-parser` GHSA-rj75-hqrm-r3gf / CVE-2026-104844 | The dependency tree resolves 6.1.5. The upstream 6.1.5 release notes explicitly say the quadratic-complexity fix was backported to the maintained 6.x line, even though older advisory metadata lists versions before 7.1.6 as affected. The npm audit may therefore overstate this specific subdependency finding until advisory metadata is reconciled. |
-| `chokidar`, `fast-glob`, `micromatch`, `postcss-nested`, Tailwind CSS | Transitive paths in the build-tool dependency tree. Retain the full audit output and re-evaluate after each dependency/lockfile change. Do not upgrade to a major Tailwind version until the AppDeploy CSS entry is supported. |
+| `postcss-selector-parser` GHSA-rj75-hqrm-r3gf / CVE-2026-104844 | The lockfile resolves version 6.1.5. Upstream release notes state the quadratic-complexity fix was backported to the maintained 6.x line, despite older advisory metadata listing versions before 7.1.6 as affected. npm audit still reports the older range; treat this as an advisory metadata mismatch needing review, not silently ignored. |
+| `postcss-nested` | Transitive Tailwind CSS 3 build dependency; currently reported because of the selector-parser path. Evaluate compatible remediation when available; do not force a major Tailwind version unsupported by AppDeploy. |
+| `tailwindcss` | Tailwind CSS 3.4.19 is reported through its dependency tree. npm suggests Tailwind CSS 4.3.3 as the fix, but the AppDeploy validator rejected Tailwind 4's canonical CSS import entry. |
+| `braces` GHSA-vfj7-8cjw-p6xm / CVE-2026-93687 | The lockfile contains `braces@3.0.3` as a development dependency. The GitHub advisory still lists no patched release. The upstream maintainer disputes the claimed attack conditions and points to the documented maximum pattern length. This advisory was present in an earlier npm audit report but not in the latest run #63 summary. Keep it in security triage rather than claiming a confirmed fix. |
+
+## AppDeploy compatibility constraint
+
+Tailwind CSS 4.3.3 plus `@tailwindcss/postcss` passed a GitHub-only npm audit, TypeScript check and Vite bundle. When the same CSS change was applied to the real AppDeploy app, the platform validator rejected `@import "tailwindcss";` and required the Tailwind CSS 3 directive form. The failed attempt was rolled back to last-known-good AppDeploy version `1792755107550`, and the app returned to `ready`. PR #10 was closed without merge.
+
+Do not deploy the CI-only SDK shim or change the hosted CSS entry to Tailwind 4 until AppDeploy supports the required syntax.
+
+## CI policy
+
+- Keep the full-tree npm audit summary visible.
+- Fail CI when production dependencies report a low-or-higher finding using `npm audit --omit=dev --audit-level=low`.
+- Keep unresolved development/build-tool advisories tracked in [issue #9](https://github.com/loolooofy69-sketch/EL-Rouji/issues/9).
+- Do not state that the entire dependency tree is audit-free while the full audit reports findings.
 
 References:
 - GitHub advisory for `braces`: https://github.com/advisories/GHSA-vfj7-8cjw-p6xm
 - Upstream discussion of the `braces` finding: https://github.com/micromatch/braces/issues/70
 - `postcss-selector-parser` releases, including the 6.1.5 backport: https://github.com/postcss/postcss-selector-parser/releases
-- GitHub advisory for selector parser complexity: https://github.com/advisories/GHSA-rj75-hqrm-r3gf
-
-## Risk boundaries
-
-The findings are in packages classified as development/build dependencies in the committed lockfile. That reduces direct production-runtime exposure, but **does not mean build-time risk is zero**: these packages are executed during installs, tooling and builds. Keep CI's production dependency audit as a hard gate and the full-tree audit visible. Do not silently suppress the full-tree advisory output.
-
-The remaining issue #9 is a decision/review item for development-tool findings and AppDeploy's supported Tailwind upgrade path. The repository owner should close it only after the remaining build-tool risk is accepted or upstream fixes/advisory corrections are available.
+- GitHub advisory for selector-parser complexity: https://github.com/advisories/GHSA-rj75-hqrm-r3gf
 
 A clean production-only audit is not a full dependency or application security audit.
