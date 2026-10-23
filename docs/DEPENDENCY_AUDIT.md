@@ -10,7 +10,7 @@ The upstream `postcss-selector-parser` 6.1.5 release backports a fix for CVE-202
 
 The separate migration branch `security/tailwind4-audit-fix` upgrades Tailwind CSS to **4.3.3**, uses `@tailwindcss/postcss` 4.3.3, switches the CSS entry to Tailwind 4's import form, and regenerates `package-lock.json`.
 
-GitHub Actions run **#48** on October 23, 2026, reported:
+GitHub Actions run **#48** validated the migration with an install-time lockfile refresh. After committing the lockfile and switching the workflow back to `npm ci`, run **#52** on October 23, 2026, confirmed the final locked dependency tree. Run #52 reported:
 
 - `npm audit`: **0 info, 0 low, 0 moderate, 0 high, 0 critical**.
 - TypeScript check: passed.
