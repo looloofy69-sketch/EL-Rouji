@@ -1,28 +1,29 @@
 # Dependency audit record
 
-**Observed:** October 23, 2026, via `npm audit --json` in GitHub Actions after `npm ci`.
+## Earlier finding
 
-The report counted **7 advisories: 5 high, 2 moderate, 0 critical**. The listed package tree is centered on development/build tooling:
+On October 23, 2026, CI against the Tailwind CSS 3 dependency tree reported **7 npm advisories: 5 high, 2 moderate, 0 critical**. The dependency paths were primarily Tailwind build tooling: `braces`, `chokidar`, `fast-glob`, `micromatch`, `postcss-nested`, and `postcss-selector-parser`.
 
-| Package | Reported severity | Reported issue / note |
-|---|---|---|
-| `tailwindcss` | High | Current Tailwind CSS 3 range has advisories; npm suggested Tailwind CSS 4.3.3 as a fix, which is a major-version migration. |
-| `braces` | High | Stack-exhaustion denial of service via deeply nested patterns. |
-| `chokidar` | High | Transitive dependency reported through the Tailwind CSS 3 dependency tree. |
-| `fast-glob` | High | Advisory reported through `micromatch`; npm reported an available fix. |
-| `micromatch` | High | Transitive pattern-matching dependency in the reported tree. |
-| `postcss-nested` | Moderate | Advisory reported through `postcss-selector-parser`; npm reported an available fix. |
-| `postcss-selector-parser` | Moderate | Quadratic-complexity selector parsing can cause CPU exhaustion. |
+The upstream `postcss-selector-parser` 6.1.5 release backports a fix for CVE-2026-104844 in the legacy v6 line, even though the advisory's range still says versions before 7.1.6 are affected. The old Tailwind 3 audit also included the `braces` stack-exhaustion advisory for which the GitHub advisory database listed no patched release at that time.
 
-These advisories arose from the dependency/build-tool tree in the CI environment. The audit output did not establish that the listed dependencies are exposed to end users at runtime; this should not be interpreted as proof of zero runtime risk either.
+## Migration trial result
 
-Tracking issue: https://github.com/looloofy69-sketch/EL-Rouji/issues/9
+The separate migration branch `security/tailwind4-audit-fix` upgrades Tailwind CSS to **4.3.3**, uses `@tailwindcss/postcss` 4.3.3, switches the CSS entry to Tailwind 4's import form, and regenerates `package-lock.json`.
 
-## Recommended handling
+GitHub Actions run **#48** on October 23, 2026, reported:
 
-- Keep the current audit result visible in CI; it is informational/non-blocking at present.
-- Review a Tailwind CSS 4 migration separately because the application uses Tailwind CSS 3 configuration/CSS conventions. Run visual regression checks on RTL, responsive layout, and custom styles before merging any major-version migration.
-- Apply compatible transitive fixes where possible, regenerate the lockfile, and rerun the audit.
-- Do not create a release tag until the remaining advisories have been remediated or explicitly risk-accepted.
+- `npm audit`: **0 info, 0 low, 0 moderate, 0 high, 0 critical**.
+- TypeScript check: passed.
+- Vite frontend bundle: passed.
+- Build used the CI-only `@appdeploy/client` shim. It did not deploy or test AppDeploy's hosted services.
 
-No package was automatically upgraded to Tailwind CSS 4 as part of the initial repository setup.
+The new lockfile has 266 package entries (versus 293 on the prior Tailwind 3 lockfile). This branch-level test indicates the specific npm audit findings that blocked progress are removed from the resolved dependency tree.
+
+## Remaining verification
+
+- [ ] Review the rendered application at desktop and mobile widths, with English/French and Arabic RTL layouts, before merging the CSS migration.
+- [ ] Verify the production AppDeploy build/runtime independently; do not deploy the CI-shim output.
+- [ ] Re-run CI after any review adjustments.
+- [ ] Complete the separate application security review covering authorization, input validation, conversation storage/deletion, and secret handling.
+
+A clean npm audit is evidence about the installed dependency tree, not a full application security audit.
