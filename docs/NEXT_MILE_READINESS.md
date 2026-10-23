@@ -15,7 +15,7 @@ Current upload support is PNG, JPEG, WebP, TXT, MD, CSV and JSON. PDF/DOCX/XLSX 
 | AppDeploy source imported | Verified | Source snapshot `1792755107550` copied to GitHub; representative files fetched back. |
 | npm lockfile | Verified | `package-lock.json` committed; `npm ci` passes in GitHub Actions. |
 | TypeScript and frontend bundle | Verified in GitHub Actions | Uses the CI-only shim for AppDeploy's injected client module. |
-| Production dependency audit | Hard gate added | CI runs `npm audit --omit=dev --audit-level=low`; branch verification is required before merge. |
+| Production dependency audit | Hard gate added | CI runs `npm audit --omit=dev --audit-level=low`; passed in run #67 on PR #11's tested tree, which was merged to main. |
 | Full development-tree audit | Outstanding risk | Latest run #63 reported 3 moderate; earlier run #38 reported 7 (5 high, 2 moderate). Production-only audit was clean. See `docs/DEPENDENCY_AUDIT.md`. |
 | Tailwind 4 migration | Blocked by hosted template | AppDeploy validator rejected `@import "tailwindcss";`. PR #10 was closed without merge. |
 | Live deployment recovery | Verified | Failed trial was rolled back to AppDeploy version `1792755107550`; status returned to `ready`. |
