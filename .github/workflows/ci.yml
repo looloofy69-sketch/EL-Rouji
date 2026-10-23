@@ -23,7 +23,7 @@ jobs:
         if: ${{ !hashFiles('package-lock.json') }}
         run: echo "EL_ROUJI_EXPORT_LOCKFILE=true" >> "$GITHUB_ENV"
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Export generated lockfile for first import
         if: env.EL_ROUJI_EXPORT_LOCKFILE == 'true' && github.event_name == 'pull_request' && github.event.pull_request.head.ref == 'ci/verify-repository-build'
         run: |
