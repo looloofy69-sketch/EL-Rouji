@@ -50,6 +50,8 @@ jobs:
             console.log('npm audit did not return parseable JSON; inspect the workflow logs.');
           }
           NODE
+      - name: Fail on dependency vulnerabilities
+        run: npm audit --audit-level=low
       - name: Type check
         run: npm run typecheck
       - name: Build frontend (CI-only AppDeploy SDK shim)
