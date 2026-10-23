@@ -12,6 +12,9 @@ This is a proposal for sequencing future work, not a statement that these items 
 
 ## Reliability and usability
 
+- [ ] Reduce the current Vite JavaScript bundle warning (about 1.12 MB minified in CI) by measuring bundle composition and introducing measured code splitting where it helps.
+- [ ] Update GitHub Actions action versions to avoid the Node 20 deprecation warning reported by the current runner; confirm compatible supported major versions before changing them.
+
 - [ ] Add tested error/retry behavior for research and attachment analysis.
 - [ ] Add accessibility checks for keyboard focus, labels, contrast, and screen-reader behavior.
 - [ ] Document retention and deletion behavior for local and account-synced conversations.
