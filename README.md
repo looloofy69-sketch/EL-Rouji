@@ -25,7 +25,7 @@ PDF and Office-document analysis are not part of the current upload flow.
 
 The repository contains an npm lockfile and GitHub Actions CI that runs `npm ci`, TypeScript checking, an npm audit summary, and a Vite build. The CI build sets `EL_ROUJI_CI_BUILD=1` to use a **build-only shim** for the AppDeploy-provided `@appdeploy/client` module. The shim is not a functioning substitute for hosted authentication/image processing and its output must not be deployed.
 
-The Tailwind CSS 4 dependency migration passed the initial CI trial (run #48) with zero npm audit findings, a passing TypeScript check, and a passing Vite bundle. It remains in [draft PR #10](https://github.com/loolooofy69-sketch/EL-Rouji/pull/10) pending visual verification of mobile responsiveness and Arabic RTL layout. The live AppDeploy application still uses its deployed version and has not been changed by the GitHub branch.
+The Tailwind CSS 4 dependency migration passed CI runs #48 and #52; run #52 used the committed lockfile and `npm ci`, and reported zero npm audit findings, a passing TypeScript check, and a passing Vite bundle. It remains in [draft PR #10](https://github.com/loolooofy69-sketch/EL-Rouji/pull/10) pending visual verification of mobile responsiveness and Arabic RTL layout. The live AppDeploy application still uses its deployed version and has not been changed by the GitHub branch.
 
 ## Research configuration
 
