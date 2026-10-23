@@ -4,7 +4,7 @@
 
 ## Latest observed audit
 
-GitHub Actions run **#63** on October 23, 2026 reported **3 moderate, 0 high, 0 critical** advisories in the full dependency tree. The latest reported packages were:
+GitHub Actions run **#67** on October 23, 2026 reported **3 moderate, 0 high, 0 critical** advisories in the full dependency tree. The latest reported packages were:
 
 - `postcss-nested` (moderate; reported via `postcss-selector-parser`)
 - `postcss-selector-parser` (moderate)
@@ -21,7 +21,7 @@ An earlier CI run (#38) reported 7 advisories (5 high, 2 moderate). The count an
 | `postcss-selector-parser` GHSA-rj75-hqrm-r3gf / CVE-2026-104844 | The lockfile resolves version 6.1.5. Upstream release notes state the quadratic-complexity fix was backported to the maintained 6.x line, despite older advisory metadata listing versions before 7.1.6 as affected. npm audit still reports the older range; treat this as an advisory metadata mismatch needing review, not silently ignored. |
 | `postcss-nested` | Transitive Tailwind CSS 3 build dependency; currently reported because of the selector-parser path. Evaluate compatible remediation when available; do not force a major Tailwind version unsupported by AppDeploy. |
 | `tailwindcss` | Tailwind CSS 3.4.19 is reported through its dependency tree. npm suggests Tailwind CSS 4.3.3 as the fix, but the AppDeploy validator rejected Tailwind 4's canonical CSS import entry. |
-| `braces` GHSA-vfj7-8cjw-p6xm / CVE-2026-93687 | The lockfile contains `braces@3.0.3` as a development dependency. The GitHub advisory still lists no patched release. The upstream maintainer disputes the claimed attack conditions and points to the documented maximum pattern length. This advisory was present in an earlier npm audit report but not in the latest run #63 summary. Keep it in security triage rather than claiming a confirmed fix. |
+| `braces` GHSA-vfj7-8cjw-p6xm / CVE-2026-93687 | The lockfile contains `braces@3.0.3` as a development dependency. The GitHub advisory still lists no patched release. The upstream maintainer disputes the claimed attack conditions and points to the documented maximum pattern length. This advisory was present in an earlier npm audit report but not in the latest run #67 summary. Keep it in security triage rather than claiming a confirmed fix. |
 
 ## AppDeploy compatibility constraint
 
