@@ -8,7 +8,9 @@ Do not publish a version tag until the items below have been checked against the
 - [x] Commit `package-lock.json`.
 - [x] Verify locked install with `npm ci` in GitHub Actions.
 - [x] Verify TypeScript check and Vite bundle in GitHub Actions (CI-only AppDeploy SDK shim).
+- [x] Confirm repository `npm ci`, TypeScript check, npm audit (zero findings), and Vite bundle in GitHub Actions on the Tailwind 4 migration branch.
 - [ ] Confirm build/release flow using the real AppDeploy runtime, not the CI shim.
+- [ ] Visually verify responsive and RTL styling after the Tailwind 4 migration.
 - [ ] Confirm tests run for the changed code; current `tests/tests.json` is not an npm test suite.
 
 ## Product checks
