@@ -20,7 +20,7 @@ This is an initial threat review, not a completed security audit. Items marked "
 
 - The repository's CI shim is not a real SDK implementation and must never be deployed.
 - AppDeploy's current template validator rejects the tested Tailwind CSS 4 CSS entry; the live app was restored to the last-known-good Tailwind CSS 3 version.
-- The latest full dependency audit (run #63) reports 3 moderate development/build-tool findings; earlier CI reported 7. The production-only dependency audit is a separate hard CI gate and passed with zero findings; it does not mean there are no build-time risks.
+- The latest full dependency audit (run #67) reports 3 moderate development/build-tool findings; earlier CI reported 7. The production-only dependency audit is a separate hard CI gate and passed with zero findings; it does not mean there are no build-time risks.
 - This review does not certify regulatory compliance, data residency, backups, rate limiting, monitoring or any SLA.
 
 ## Minimum evidence before broad public rollout
