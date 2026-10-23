@@ -10,6 +10,7 @@ Status: deployed source imported; CI established; dependency migration candidate
 - Fixed source type-check issues and added an npm lockfile verified with `npm ci`.
 - Historical Tailwind CSS 3 audit: 7 findings (5 high, 2 moderate).
 - Candidate Tailwind CSS 4.3.3 migration in PR #10: Actions run #55 passed locked install, npm audit with zero findings, TypeScript check, and Vite bundle.
+- CI now includes a hard dependency-audit gate (`npm audit --audit-level=low`) and passed again on run #61.
 - Static class scan found no Tailwind `@apply` or `@layer` dependency. Visual parity is still unverified.
 - No secret values were committed.
 
