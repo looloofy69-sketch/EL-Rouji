@@ -8,7 +8,7 @@ Do not publish a version tag until the items below have been checked against the
 - [x] Commit `package-lock.json`.
 - [x] Verify locked install with `npm ci` in GitHub Actions.
 - [x] Verify TypeScript check and Vite bundle in GitHub Actions (CI-only AppDeploy SDK shim).
-- [ ] Verify the production dependency audit gate on the current merge commit (`npm audit --omit=dev --audit-level=low`).
+- [x] Verify the production dependency audit gate on the PR #11 tested tree in GitHub Actions run #67 (`npm audit --omit=dev --audit-level=low`); that tree was merged to `main`.
 - [x] Keep AppDeploy-compatible Tailwind CSS 3 entry syntax; the Tailwind CSS 4 trial was rejected by the hosted validator and rolled back.
 - [ ] Confirm build/release flow using the real AppDeploy runtime, not the CI shim.
 - [ ] Confirm tests run for changed code; `tests/tests.json` is an AppDeploy QA specification, not an npm test suite.
