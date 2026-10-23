@@ -25,7 +25,7 @@ PDF and Office-document analysis are not part of the current upload flow.
 
 GitHub Actions runs `npm ci`, a full dependency-audit summary, a blocking production dependency audit, TypeScript checking and a Vite build. The production audit gate is `npm audit --omit=dev --audit-level=low`.
 
-The full development/build-tool tree still reports 7 npm audit findings (5 high, 2 moderate). These are documented as an unresolved build-time risk; the production-only gate does not mean the entire dependency tree is audit-free. See [the dependency audit record](docs/DEPENDENCY_AUDIT.md).
+The latest full-tree npm audit run (#63) reported 3 moderate findings in development/build tooling; an earlier run reported 7 (5 high, 2 moderate). The production-only audit gate passed with zero vulnerabilities, but this does not mean the entire dependency tree is audit-free. See [the dependency audit record](docs/DEPENDENCY_AUDIT.md).
 
 The CI build sets `EL_ROUJI_CI_BUILD=1` to use a **build-only shim** for the AppDeploy-provided `@appdeploy/client` module. That shim is not a functional substitute for hosted authentication or image processing and its output must not be deployed.
 
