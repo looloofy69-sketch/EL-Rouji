@@ -29,7 +29,7 @@ export const auth = {
 };
 
 export const image = {
-  resizeIfNeeded: async (file: File, _options?: { maxDimension?: number; maxPixels?: number }) => ({
+  resizeIfNeeded: async (file: File, _options?: { maxDimension?: number; maxPixels?: number; quality?: number; mimeType?: string }) => ({
     data: "",
     mimeType: file.type || "application/octet-stream",
     bytes: file.size,

@@ -19,8 +19,37 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Install dependencies
-        run: npm install
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Dependency audit summary
+        continue-on-error: true
+        run: |
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          let raw = '';
+          try {
+            raw = execFileSync('npm', ['audit', '--json'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+          } catch (error) {
+            raw = String(error.stdout || '');
+          }
+          try {
+            const audit = JSON.parse(raw);
+            const vulnerabilities = Object.fromEntries(
+              Object.entries(audit.vulnerabilities || {}).map(([name, item]) => [
+                name,
+                {
+                  severity: item.severity,
+                  range: item.range,
+                  fixAvailable: item.fixAvailable,
+                  via: (item.via || []).map((entry) => typeof entry === 'string' ? entry : entry.title),
+                },
+              ])
+            );
+            console.log(JSON.stringify({ counts: audit.metadata?.vulnerabilities, vulnerabilities }, null, 2));
+          } catch {
+            console.log('npm audit did not return parseable JSON; inspect the workflow logs.');
+          }
+          NODE
       - name: Type check
         run: npm run typecheck
       - name: Build frontend (CI-only AppDeploy SDK shim)
