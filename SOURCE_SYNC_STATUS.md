@@ -18,8 +18,8 @@ Status: deployed source imported; repository CI established; AppDeploy-compatibl
 
 ## Still outstanding
 
-- Verify the production-only npm audit gate and GitHub Actions on this maintenance branch and its merge commit.
-- Latest full dependency-tree audit run #63 reported 3 moderate development/build-tool findings; earlier run #38 reported 7 (5 high, 2 moderate). The production-only audit gate returned zero vulnerabilities. Review and explicitly disposition the full-tree findings in issue #9.
+- PR #11 merged to `main`; GitHub Actions run #67 passed `npm ci`, production-only audit (zero findings), TypeScript and Vite build on the same tested source tree.
+- Latest full dependency-tree audit run #67 reported 3 moderate development/build-tool findings; earlier run #38 reported 7 (5 high, 2 moderate). The production-only audit gate returned zero vulnerabilities. Review and explicitly disposition the full-tree findings in issue #9.
 - Complete hosted QA for research, auth/account isolation, history deletion, attachments and multilingual mobile/RTL rendering.
 - Review backend authorization, input validation, rate limiting, privacy/retention and rollback procedure.
 - No release tag has been created; the release checklist remains incomplete.
