@@ -16,6 +16,8 @@ The report counted **7 advisories: 5 high, 2 moderate, 0 critical**. The listed 
 
 These advisories arose from the dependency/build-tool tree in the CI environment. The audit output did not establish that the listed dependencies are exposed to end users at runtime; this should not be interpreted as proof of zero runtime risk either.
 
+Tracking issue: https://github.com/looloofy69-sketch/EL-Rouji/issues/9
+
 ## Recommended handling
 
 - Keep the current audit result visible in CI; it is informational/non-blocking at present.
