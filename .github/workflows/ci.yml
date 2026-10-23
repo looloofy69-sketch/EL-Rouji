@@ -19,12 +19,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Install dependencies for migration trial
-        run: npm install
-      - name: Export migration lockfile for review
-        if: github.event_name == 'pull_request'
-        run: |
-          node -e 'const s=require("fs").readFileSync("package-lock.json").toString("base64"); for(let i=0;i<s.length;i+=4000) console.log("ELROUJI_LOCKFILE_CHUNK_"+i+"_"+s.slice(i,i+4000)+"_END");'
+      - name: Install locked dependencies
+        run: npm ci
       - name: Dependency audit summary
         continue-on-error: true
         run: |
