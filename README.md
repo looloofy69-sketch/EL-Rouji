@@ -46,4 +46,4 @@ EL_ROUJI_CI_BUILD=1 npm run build
 
 **Do not deploy the CI-shim build.** Deploy through AppDeploy so the platform-provided SDK and backend runtime are used.
 
-See [architecture](docs/ARCHITECTURE.md), [integration notes](docs/INTEGRATIONS.md), [the roadmap](docs/ADDON_ROADMAP.md), [CI build boundary](docs/CI.md), [dependency audit record](docs/DEPENDENCY_AUDIT.md), and [the release checklist](docs/RELEASE_CHECKLIST.md).
+Operational references: [next-mile readiness](docs/NEXT_MILE_READINESS.md), [QA test plan](docs/QA_TEST_PLAN.md), [operations runbook](docs/OPERATIONS_RUNBOOK.md), [architecture](docs/ARCHITECTURE.md), [integration notes](docs/INTEGRATIONS.md), [add-on roadmap](docs/ADDON_ROADMAP.md), [CI build boundary](docs/CI.md), [dependency audit record](docs/DEPENDENCY_AUDIT.md), and [release checklist](docs/RELEASE_CHECKLIST.md).
