@@ -9,7 +9,7 @@ Status: deployed source imported; repository CI setup complete; dependency-audit
 - Added repository docs, security/contribution guidance, issue/PR templates, Dependabot, and GitHub Actions CI.
 - The Tailwind CSS 3 dependency tree originally returned 7 npm audit findings (5 high, 2 moderate).
 - Tailwind CSS 4.3.3 migration trial in draft PR #10 completed: run #48 reported zero npm audit findings, and both typecheck and Vite build passed.
-- The current migration branch includes the new lockfile and CI has been switched back to `npm ci`; an additional locked-install run is needed to verify this exact final branch state.
+- The migration branch includes the refreshed lockfile and CI uses `npm ci`. GitHub Actions run #52 verified that exact locked dependency tree: install, audit (zero findings), TypeScript, and Vite build all passed.
 - No secret values were committed.
 
 ## Still outstanding
