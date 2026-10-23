@@ -7,18 +7,14 @@ import {
   ArrowUpRight,
   PackageOpen,
   BookOpen,
-  Bot,
   Check,
   ChevronDown,
-  Clock,
   Code2,
   Compass,
   Copy,
   Download,
-  FileText,
   Globe,
   Languages,
-  Lightbulb,
   Loader2,
   Menu,
   MessageCircle,
@@ -408,15 +404,6 @@ const modeNames: Record<Language, Record<Mode, string>> = {
     coding: 'البرمجة',
     planning: 'التخطيط',
   },
-};
-
-const modeDescriptions: Record<Mode, string> = {
-  assistant: 'General help',
-  research: 'Search live web results, synthesize evidence, and cite the returned source list.',
-  writing: 'Draft, edit, translate, and refine text.',
-  study: 'Teach clearly, one step at a time.',
-  coding: 'Help write, explain, and debug code.',
-  planning: 'Turn a goal into practical steps.',
 };
 
 const modeIcons = {
