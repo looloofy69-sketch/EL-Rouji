@@ -9,6 +9,7 @@ Status: deployed source imported and repository CI checks established.
 - Added repository files: documentation, security/contribution guidance, issue/PR templates, Dependabot, GitHub Actions CI, and a CI-only AppDeploy SDK shim.
 - Added `package-lock.json` from the CI runner and verified it with a successful `npm ci` workflow.
 - GitHub Actions run #38 succeeded: locked install, dependency-audit summary, TypeScript check, and Vite production bundle. The Vite step used the CI-only shim, not the hosted AppDeploy SDK.
+- Dependency remediation is tracked in https://github.com/looloofy69-sketch/EL-Rouji/issues/9.
 - No secret values were committed.
 
 ## Still outstanding
