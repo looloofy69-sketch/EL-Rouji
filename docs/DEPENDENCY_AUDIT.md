@@ -12,7 +12,7 @@ GitHub Actions run **#67** on October 23, 2026 reported **3 moderate, 0 high, 0 
 
 The production-only audit in the same run (`npm audit --omit=dev --audit-level=low`) returned **0 vulnerabilities** and passed the blocking CI step.
 
-An earlier CI run (#38) reported 7 advisories (5 high, 2 moderate). The count and severity returned by npm's audit metadata can change as advisory feeds are updated even when the package lockfile does not change. Run #63 is the latest observed result for the current Tailwind 3 lockfile, not a claim that the full dependency tree has no findings.
+An earlier CI run (#38) reported 7 advisories (5 high, 2 moderate). The count and severity returned by npm's audit metadata can change as advisory feeds are updated even when the package lockfile does not change. Run #67 is the latest observed result for the current Tailwind 3 lockfile, not a claim that the full dependency tree has no findings.
 
 ## Findings and disposition
 
