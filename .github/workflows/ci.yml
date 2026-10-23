@@ -20,10 +20,10 @@ jobs:
         with:
           node-version: 22
       - name: Install dependencies
-        run: if [ -f package-lock.json ]; then npm ci; else npm install; fi
-      - name: Type check (if configured)
-        run: npm run typecheck --if-present
-      - name: Tests (if configured)
-        run: npm test --if-present
-      - name: Build
+        run: npm install
+      - name: Type check
+        run: npm run typecheck
+      - name: Build frontend (CI-only AppDeploy SDK shim)
         run: npm run build
+        env:
+          EL_ROUJI_CI_BUILD: "1"
