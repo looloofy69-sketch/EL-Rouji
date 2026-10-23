@@ -4,10 +4,12 @@ Do not publish a version tag until the items below have been checked against the
 
 ## Build and source
 
-- [ ] Repository clean-install succeeds using `npm ci` and committed lockfile.
-- [ ] GitHub Actions build passes on the release commit.
-- [ ] TypeScript checks and automated tests run where configured.
-- [ ] Build output is produced from repository source, not an untracked local copy.
+- [x] Current deployed source snapshot imported into GitHub.
+- [x] Commit `package-lock.json`.
+- [x] Verify locked install with `npm ci` in GitHub Actions.
+- [x] Verify TypeScript check and Vite bundle in GitHub Actions (CI-only AppDeploy SDK shim).
+- [ ] Confirm build/release flow using the real AppDeploy runtime, not the CI shim.
+- [ ] Confirm tests run for the changed code; current `tests/tests.json` is not an npm test suite.
 
 ## Product checks
 
@@ -19,8 +21,9 @@ Do not publish a version tag until the items below have been checked against the
 
 ## Security and operations
 
+- [ ] Review and remediate or formally accept the 7 npm audit advisories (5 high, 2 moderate) listed in `docs/DEPENDENCY_AUDIT.md`.
+- [ ] Review authorization, API input validation, rate limiting, data retention, and deletion behavior.
 - [ ] Verify backend secrets and rotate any credential exposed during development.
-- [ ] Review dependencies, authorization, API input validation, rate limiting, and data retention.
 - [ ] Verify research search end-to-end with a valid key.
 - [ ] Document known limitations and rollback approach.
 
