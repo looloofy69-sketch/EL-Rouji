@@ -1,22 +1,25 @@
 # EL-Rouji source sync
 
-Status: deployed source imported and repository CI checks established.
+Status: deployed source imported; repository CI established; AppDeploy-compatible Tailwind CSS 3 remains the active baseline.
 
 - Source app: `el-rouji-70120b`
 - Source snapshot: `1792755107550`
-- Target repository: https://github.com/looloofy69-sketch/EL-Rouji
+- Target repository: https://github.com/loolooofy69-sketch/EL-Rouji
 - Transferred source/config paths: `backend/index.ts`, `index.html`, `package.json`, `postcss.config.js`, `src/App.tsx`, `src/components/BuiltInTools.tsx`, `src/index.css`, `src/main.tsx`, `tailwind.config.js`, `tests/tests.json`, `tsconfig.json`, `vite.config.ts`.
-- Added repository files: documentation, security/contribution guidance, issue/PR templates, Dependabot, GitHub Actions CI, and a CI-only AppDeploy SDK shim.
-- Added `package-lock.json` from the CI runner and verified it with a successful `npm ci` workflow.
-- GitHub Actions run #38 succeeded: locked install, dependency-audit summary, TypeScript check, and Vite production bundle. The Vite step used the CI-only shim, not the hosted AppDeploy SDK.
-- Dependency remediation is tracked in https://github.com/looloofy69-sketch/EL-Rouji/issues/9.
+- GitHub Actions includes `npm ci`, full-tree audit summary, production audit gate, TypeScript check and a Vite build using the CI-only AppDeploy SDK shim.
 - No secret values were committed.
+
+## Tailwind CSS 4 compatibility attempt
+
+- Tailwind 4.3.3 passed the GitHub-only npm audit, typecheck and Vite bundle.
+- Applying its `@import "tailwindcss";` entry to the actual AppDeploy app failed platform validation, which requires the Tailwind 3 directive form.
+- The failed attempt was restored to AppDeploy version `1792755107550`; status was subsequently verified as `ready`.
+- PR #10 was closed without merge. The live app remains on the AppDeploy-compatible Tailwind CSS 3 baseline.
 
 ## Still outstanding
 
-- npm audit reported 7 advisories (5 high, 2 moderate) in the Tailwind CSS 3 build-tool dependency tree; see `docs/DEPENDENCY_AUDIT.md`.
-- End-to-end behavior of hosted research/search credentials has not been verified by this source-sync operation.
-- Hosted authentication, account isolation, conversation data retention/deletion, attachment handling, and production security controls still need dedicated testing.
+- Verify the production-only npm audit gate and GitHub Actions on this maintenance branch and its merge commit.
+- Full dependency-tree audit still reports 7 development/build-tool findings (5 high, 2 moderate); review and explicitly disposition them in issue #9.
+- Complete hosted QA for research, auth/account isolation, history deletion, attachments and multilingual mobile/RTL rendering.
+- Review backend authorization, input validation, rate limiting, privacy/retention and rollback procedure.
 - No release tag has been created; the release checklist remains incomplete.
-
-The source synchronization did not change the live AppDeploy deployment.
