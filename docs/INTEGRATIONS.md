@@ -4,6 +4,8 @@
 
 Research mode uses a server-side Tavily search integration when `TAVILY_API_KEY` is configured in AppDeploy's secure backend settings. Never put the key in frontend variables, public commits, screenshots, or issue reports. A secret entry being configured does not prove the credential is valid; run an end-to-end search test after configuration.
 
+Direct HTTP(S) page URL scraping is temporarily disabled while AppDeploy's destination-address, DNS-resolution, and redirect protections are verified. Search-based research remains supported; the UI explains the restriction in English, French, and Arabic. This source change is not live until a separate AppDeploy deployment is validated.
+
 ## AppDeploy
 
 The current hosted app uses AppDeploy for deployment, backend endpoints, authentication/client services, and secret configuration. The deployed URL is https://el-rouji-70120b.v2.appdeploy.ai/.
