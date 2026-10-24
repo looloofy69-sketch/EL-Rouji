@@ -11,13 +11,13 @@ This document excludes unrelated projects. Repository contents and CI were inspe
 |---|---|---|---|
 | Core application | [EL-Rouji](https://github.com/looloofy69-sketch/EL-Rouji) | React/TypeScript/Vite client, AppDeploy backend handlers, CI, API and operations documentation | Complete hosted QA, account-isolation proof, full application security review, and final release decision |
 | MCP adapter | [Mcps-EL-Rouji-](https://github.com/looloofy69-sketch/Mcps-EL-Rouji-) | Initial executable Python MCP adapter merged via [PR #1](https://github.com/looloofy69-sketch/Mcps-EL-Rouji-/pull/1); its CI passed; health is read-only and generation tools are opt-in | Local MCP-host verification, live API smoke tests, and server-side quota/abuse-control review |
-| Jobs and scheduling | [EL-Rouji-jobs](https://github.com/looloofy69-sketch/EL-Rouji-jobs) | Product, API, lifecycle, security, and operations specifications | No executable queue, scheduler, durable job store, worker, or job API |
+| Jobs and scheduling | [EL-Rouji-jobs](https://github.com/looloofy69-sketch/EL-Rouji-jobs) | Product/API/security specs plus merged [ADR-001](https://github.com/looloofy69-sketch/EL-Rouji-jobs/blob/main/docs/ADR-001-APPDEPLOY-JOB-RUNTIME.md) proposing AppDeploy-native cron/database for a low-volume MVP | No executable queue, cron configuration, durable job workflow, worker, or job API; owner model/use case and bounded queue access still need approval |
 | Dataset governance | [EL-Rouji-datasetes](https://github.com/looloofy69-sketch/EL-Rouji-datasetes) | Templates plus a merged standard-library JSONL/manifest validator, unit tests, and GitHub Actions CI | No production dataset; no dataset has been claimed licensed, consented, privacy-reviewed, or approved for training |
-| E-commerce | [E-commerce-EL-Rouji-](https://github.com/looloofy69-sketch/E-commerce-EL-Rouji-) | Product requirements, architecture, data model, draft API contracts, security and staged roadmap | No running storefront, database, catalog, checkout, payment/shipping integration, or selected provider/business model |
+| E-commerce | [E-commerce-EL-Rouji-](https://github.com/looloofy69-sketch/E-commerce-EL-Rouji-) | Requirements/docs plus merged [JSON Schema contracts and CI](https://github.com/looloofy69-sketch/E-commerce-EL-Rouji-/tree/main/schemas) for product, checkout request/response, and error envelope | No running storefront/backend, database, catalog/checkout endpoint, payment/shipping integration, or selected provider/business model |
 
 ## Core application status
 
-Current source uses React, TypeScript, Vite, Tailwind CSS 3, and an AppDeploy backend. The documented routes include health, chat, research, image/document analysis, and account-protected conversation sync. The core repository's CI has passed its current typecheck/build workflow and enforces a production dependency audit, but the latest documented full development-tree audit still reports three moderate findings. A clean production-only audit is not equivalent to a clean full dependency tree.
+Current source uses React, TypeScript, Vite, Tailwind CSS 3, and an AppDeploy backend. The documented routes include health, chat, research, image/document analysis, and account-protected conversation sync. Direct HTTP(S) page scraping has been removed from GitHub main until the hosted fetcher's destination/redirect protections are verified; query-based search remains available. The last verified main CI run #86 passed after the dependency-floor guard merge; the current latest commit still needs its own post-merge run recorded. The full dependency-tree audit reports three moderate build-tool advisory entries, while the production-only audit reports zero. A clean production-only audit is not a clean full dependency tree, and the source change has not been deployed to AppDeploy.
 
 Open release blockers are tracked in [Next-mile readiness](NEXT_MILE_READINESS.md), [QA plan](QA_TEST_PLAN.md), [security review](SECURITY_REVIEW.md), [dependency audit](DEPENDENCY_AUDIT.md), and [Issue #9](https://github.com/looloofy69-sketch/EL-Rouji/issues/9). Do not create a release tag until the release checklist is supported by test evidence and explicit risk decisions.
 
@@ -50,7 +50,7 @@ The open Dependabot changes are separate proposals, not automatic approval to up
 - Enable generation only after the endpoint cost and abuse-control decision has been recorded.
 
 ### Gate 3 — Jobs service decision
-Before writing the worker, select the platform-supported durable datastore/queue and define the owner model, allow-listed job types, state machine, idempotency contract, quotas, retries, retention, and monitoring. Then build one authenticated single-shot job end to end. Recurring schedules come later, after time-zone/DST and missed-run semantics are accepted.
+The merged jobs ADR identifies AppDeploy cron/database as a candidate runtime for a low-volume MVP; it is not approved implementation. Confirm the first use case, owner model, and bounded due-job selection strategy, then define allow-listed job types, state machine, idempotency, quotas, retries, retention, and monitoring. Only then build one authenticated single-shot job end to end. Recurring schedules come later, after time-zone/DST and missed-run semantics are accepted.
 
 ### Gate 4 — Dataset evaluation
 - Add a small synthetic-only evaluation set with source references and explicit rubrics.
@@ -59,6 +59,7 @@ Before writing the worker, select the platform-supported durable datastore/queue
 - Do not add scraped, private, or user-submitted content without a documented legal/privacy approval path.
 
 ### Gate 5 — Commerce decisions and implementation
+- Treat the merged JSON Schemas as draft interface contracts, not live API enforcement; add server-side validation and contract tests once a runtime is selected.
 - Choose merchant vs marketplace, initial scope, supported languages/currency, identity and guest checkout requirements.
 - Validate local payment-provider eligibility and terms, shipping/fulfillment, tax/invoice, returns/refunds, and reconciliation.
 - Only then select the stack and implement catalog/cart/order/payment workflows with idempotency, server-calculated amounts, access-control tests, and test-provider evidence.
