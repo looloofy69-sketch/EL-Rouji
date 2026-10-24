@@ -1,4 +1,5 @@
 import { ai, error, json, requireAuth, router, secrets, storage } from '@appdeploy/sdk';
+import { safeHttpUrl } from './url-safety.ts';
 
 type ChatMessage = { role: 'user' | 'assistant'; content: string };
 type SourceLink = { title: string; url: string; snippet: string; domain: string; publishedAt?: string };
@@ -38,20 +39,6 @@ function isSafeConversationId(value: string) {
 }
 function safeLanguage(value: unknown) {
   return typeof value === 'string' && languageNames[value] ? value : 'en';
-}
-function safeHttpUrl(value: unknown) {
-  if (typeof value !== 'string' || value.length > 2000) return null;
-  try {
-    const parsed = new URL(value);
-    if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return null;
-    const host = parsed.hostname.toLowerCase();
-    if (host === 'localhost' || host.endsWith('.local') || host === '::1' ||
-      /^127\./.test(host) || /^10\./.test(host) || /^192\.168\./.test(host) ||
-      /^169\.254\./.test(host) || /^172\.(1[6-9]|2\d|3[01])\./.test(host)) return null;
-    return parsed;
-  } catch {
-    return null;
-  }
 }
 function parseStoredConversation(content: string | null): ConversationRecord | null {
   if (!content || content.length > 240000) return null;
