@@ -21,6 +21,16 @@ Read-only verification through the connected AppDeploy source/status tools found
 
 The runtime status and inspected-file parity do not establish correct account isolation, rate limiting, URL-fetch security, retention/deletion behavior, or successful operation of every API. Those remain release checks.
 
+## Source-only URL-fetch mitigation — 24 October 2026
+
+GitHub main now contains security PR #17 and its UI follow-up PR #19. The route rejects direct HTTP(S) URLs before any call to the hosted scraper; normal query-based Tavily search remains supported. The standalone URL helper has regression tests for local/special hostnames, private and reserved IPv4 ranges, alternate IPv4 notation, IPv6 local/mapped/documentation ranges, credentials, schemes, and input length.
+
+- Source commit: `28db184b8d8993c25df8d4a15436fbae635dba0d`.
+- Main GitHub Actions run #92 passed: https://github.com/looloofy69-sketch/EL-Rouji/actions/runs/40099318099.
+- This is a source and CI result only. No AppDeploy source write, deploy, or live regression test was performed after this change.
+- The last verified AppDeploy snapshot remains `1792755107550`. Until a new reviewed deployment is verified, do not claim the safeguard is active in production; assume the hosted app may still allow direct page scraping.
+- Before deployment, use the actual AppDeploy backend validation path to confirm that the new helper import resolves, then test both the direct-URL rejection and normal search flow in a controlled environment.
+
 ## Tailwind CSS 4 compatibility attempt
 
 - Tailwind 4.3.3 passed the GitHub-only npm audit, typecheck and Vite bundle.
