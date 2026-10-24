@@ -9,6 +9,18 @@ Status: deployed source imported; repository CI established; AppDeploy-compatibl
 - GitHub Actions includes `npm ci`, full-tree audit summary, production audit gate, TypeScript check and a Vite build using the CI-only AppDeploy SDK shim.
 - No secret values were committed.
 
+
+## Live deployment and source parity check — 24 October 2026
+
+Read-only verification through the connected AppDeploy source/status tools found:
+
+- App `el-rouji-70120b` is currently reported as `ready` at live URL https://el-rouji-70120b.v2.appdeploy.ai/.
+- The deployed last-valid snapshot remains `1792755107550`; the tool's latest available QA snapshot is dated 23 October 2026 and reported no frontend errors, network errors, or backend errors. This is not a fresh end-to-end test of every user journey.
+- Compared against GitHub `main` at the time of review: `backend/index.ts`, `src/components/BuiltInTools.tsx`, `src/index.css`, `src/main.tsx`, and `index.html` matched exactly. `src/App.tsx` differed only by four unused icon imports and the unused `modeDescriptions` constant present in the deployed snapshot but removed from GitHub source.
+- The repository and deployed snapshot are therefore functionally aligned in the inspected paths, but not byte-identical in `src/App.tsx`. No live application code was changed during this verification.
+
+The runtime status and inspected-file parity do not establish correct account isolation, rate limiting, URL-fetch security, retention/deletion behavior, or successful operation of every API. Those remain release checks.
+
 ## Tailwind CSS 4 compatibility attempt
 
 - Tailwind 4.3.3 passed the GitHub-only npm audit, typecheck and Vite bundle.
