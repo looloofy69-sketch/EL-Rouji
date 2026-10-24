@@ -29,6 +29,8 @@ Use this plan against the real hosted AppDeploy app. GitHub Actions validates pa
 | TOOL-02 | Calculator with invalid expression, unknown names or code-like input | Safely rejected; no code execution or page crash. |
 | RES-01 | Run research with a valid search key | Answer includes usable source cards/links. |
 | RES-02 | Run research with missing/invalid key in a non-production test setting | Clear error/fallback without disclosing credentials. |
+| RES-03 | Submit a direct HTTP(S) page URL in Research mode | Request is rejected with an explanatory 400; no remote scrape is attempted while destination/redirect controls are unverified. |
+| RES-04 | Submit normal search questions after the URL-scrape guard | Search-based research still returns bounded source cards or a safe provider error. |
 
 ## Attachments
 

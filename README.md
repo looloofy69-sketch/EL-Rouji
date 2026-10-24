@@ -31,6 +31,9 @@ The CI build sets `EL_ROUJI_CI_BUILD=1` to use a **build-only shim** for the App
 
 ## Hosting and research configuration
 
+Direct page URL scraping in Research mode is temporarily disabled while destination-address, DNS-rebinding, and redirect protections in the hosted scraper are verified. Search-based research remains available when `TAVILY_API_KEY` is configured.
+
+
 The live app uses AppDeploy's real client SDK and backend runtime. Research mode requires `TAVILY_API_KEY` in secure server-side AppDeploy settings. Do not put service credentials in source files, frontend environment variables, issue reports or commits. A configured secret does not by itself prove that live search works.
 
 A Tailwind CSS 4 migration trial was rejected by AppDeploy's current validator because the CSS entry is unsupported. The app was rolled back to last-known-good version `1792755107550` and returned to `ready`; the hosted app remains on Tailwind CSS 3.
