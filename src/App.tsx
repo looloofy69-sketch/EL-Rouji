@@ -157,7 +157,8 @@ const copy = {
     accountConnected: 'Account connected',
     cloudSync: 'Cloud sync',
     webResearchReady: 'Live web search ready · source links included',
-    webResearchSetup: 'Web search needs a Tavily key. You can also paste a public page URL to analyze one page.',
+    webResearchSetup: 'Web search needs a Tavily key. Direct page URL analysis is temporarily disabled; ask a question instead.',
+    directUrlResearchDisabled: 'Direct page URLs are temporarily disabled while security checks are completed. Ask a research question instead; source links will be included when available.',
     researchUnavailable: 'Live web search is not configured yet. Store TAVILY_API_KEY in the secure app settings.',
     sourcesLabel: 'Sources',
     attachFile: 'Attach an image or text file',
@@ -262,7 +263,8 @@ const copy = {
     accountConnected: 'Compte connecté',
     cloudSync: 'Synchronisation cloud',
     webResearchReady: 'Recherche web active · liens des sources inclus',
-    webResearchSetup: 'La recherche web nécessite une clé Tavily. Vous pouvez aussi coller l’URL d’une page publique.',
+    webResearchSetup: 'La recherche web nécessite une clé Tavily. L’analyse directe d’une URL est temporairement désactivée ; posez plutôt une question.',
+    directUrlResearchDisabled: 'L’analyse directe d’une URL est temporairement désactivée pendant les vérifications de sécurité. Posez plutôt une question de recherche ; les liens des sources seront inclus lorsqu’ils seront disponibles.',
     researchUnavailable: 'La recherche web n’est pas configurée. Ajoutez TAVILY_API_KEY dans les paramètres sécurisés.',
     sourcesLabel: 'Sources',
     attachFile: 'Joindre une image ou un fichier texte',
@@ -365,7 +367,8 @@ const copy = {
     accountConnected: 'الحساب متصل',
     cloudSync: 'المزامنة السحابية',
     webResearchReady: 'البحث المباشر في الويب متاح · روابط المصادر مرفقة',
-    webResearchSetup: 'يحتاج البحث إلى مفتاح Tavily. يمكنك أيضًا لصق رابط صفحة عامة لتحليلها.',
+    webResearchSetup: 'يحتاج البحث إلى مفتاح Tavily. تحليل روابط الصفحات مباشرةً معطّل مؤقتًا؛ اطرح سؤالًا بدلًا من ذلك.',
+    directUrlResearchDisabled: 'تحليل روابط الصفحات مباشرةً معطّل مؤقتًا إلى حين استكمال فحوصات الأمان. اطرح سؤالًا بحثيًا بدلًا من ذلك؛ وستُرفق روابط المصادر عند توفرها.',
     researchUnavailable: 'لم يتم إعداد البحث المباشر بعد. أضف TAVILY_API_KEY في إعدادات التطبيق الآمنة.',
     sourcesLabel: 'المصادر',
     attachFile: 'إرفاق صورة أو ملف نصي',
@@ -871,9 +874,12 @@ function App() {
       });
       void saveCloudConversation(upsertConversation(conversations, conversationId, finalMessages)[0]);
     } catch {
-      const failureText = mode === 'research' && !webSearchReady
-        ? t.researchUnavailable
-        : selectedFile ? t.fileAnalysisUnavailable : t.genericError;
+      const isDirectUrlResearch = mode === 'research' && /^https?:\/\//i.test(taskPrompt.trim());
+      const failureText = isDirectUrlResearch
+        ? t.directUrlResearchDisabled
+        : mode === 'research' && !webSearchReady
+          ? t.researchUnavailable
+          : selectedFile ? t.fileAnalysisUnavailable : t.genericError;
       const errorMessage: ChatMessage = { id: makeId(), role: 'assistant', content: failureText, createdAt: Date.now() };
       const failedMessages = [...nextMessages, errorMessage];
       setConversations(previous => {
