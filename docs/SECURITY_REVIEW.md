@@ -20,7 +20,7 @@ This is an initial threat review, not a completed security audit. Items marked "
 
 - The repository's CI shim is not a real SDK implementation and must never be deployed.
 - AppDeploy's current template validator rejects the tested Tailwind CSS 4 CSS entry; the live app was restored to the last-known-good Tailwind CSS 3 version.
-- The latest full dependency audit (run #67) reports 3 moderate development/build-tool findings; earlier CI reported 7. The production-only dependency audit is a separate hard CI gate and passed with zero findings; it does not mean there are no build-time risks.
+- The latest full dependency audit (run #81, October 24, 2026) reports 3 moderate development/build-tool advisory entries and 0 high/critical findings; the production-only audit passed with zero findings. The lockfile resolves postcss-selector-parser 6.1.5, which upstream documents as the 6.x backport of the quadratic-parsing fix; CI now guards that version floor and the Tailwind 3 baseline. npm audit still reports the older advisory range, so the metadata mismatch remains visible and the full tree is not claimed to be audit-free.
 - This review does not certify regulatory compliance, data residency, backups, rate limiting, monitoring or any SLA.
 
 ## Minimum evidence before broad public rollout
