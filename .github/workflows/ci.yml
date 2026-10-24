@@ -21,6 +21,8 @@ jobs:
           node-version: 22
       - name: Install locked dependencies
         run: npm ci
+      - name: Check patched selector-parser and AppDeploy Tailwind floors
+        run: node scripts/check-dependency-security.mjs
       - name: Dependency audit summary
         continue-on-error: true
         run: |
