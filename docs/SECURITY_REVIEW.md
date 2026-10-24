@@ -18,7 +18,7 @@ This is an initial threat review, not a completed security audit. Items marked "
 
 ## Known boundaries
 
-- Direct URL scraping is disabled in the current proposed source branch until the hosted scraper's DNS-resolution, redirect, and destination-address protections are demonstrated. A static URL parser cannot by itself prevent DNS rebinding or redirect-to-private-target behavior.
+- Direct URL scraping is disabled in GitHub main (merged PR #17), until the hosted scraper's DNS-resolution, redirect, and destination-address protections are demonstrated. The running AppDeploy snapshot has not been updated by this work, so this mitigation is not yet live. A static URL parser cannot by itself prevent DNS rebinding or redirect-to-private-target behavior.
 
 - The repository's CI shim is not a real SDK implementation and must never be deployed.
 - AppDeploy's current template validator rejects the tested Tailwind CSS 4 CSS entry; the live app was restored to the last-known-good Tailwind CSS 3 version.
@@ -31,5 +31,6 @@ This is an initial threat review, not a completed security audit. Items marked "
 - [ ] Verify backend input validation and useful 4xx errors across app-owned endpoints.
 - [ ] Confirm conversation deletion and retention semantics with an explicit policy.
 - [ ] Confirm research key behavior end-to-end without logging the key.
+- [ ] Deploy the direct-URL-scraping safeguard through AppDeploy only after validating that the backend compiles with the new URL helper; confirm that direct URL input is rejected in the hosted app and normal search-based research still works.
 - [ ] Review dependency audit output and record risk acceptance/remediation in issue #9.
 - [ ] Test a real AppDeploy rollback and record the prior version ID.
