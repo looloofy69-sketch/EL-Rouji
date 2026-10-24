@@ -54,4 +54,6 @@ EL_ROUJI_CI_BUILD=1 npm run build
 
 No release tag has been created. Product QA, account/data-access review, live research verification and formal disposition of the full-tree build-tool audit findings remain outstanding.
 
+Project-wide repository boundaries and delivery gates: [EL-Rouji ecosystem map](docs/EL_ROUJI_ECOSYSTEM.md).
+
 Operational references: [next-mile readiness](docs/NEXT_MILE_READINESS.md), [QA test plan](docs/QA_TEST_PLAN.md), [operations runbook](docs/OPERATIONS_RUNBOOK.md), [architecture](docs/ARCHITECTURE.md), [integration notes](docs/INTEGRATIONS.md), [add-on roadmap](docs/ADDON_ROADMAP.md), [CI boundary](docs/CI.md), [dependency audit](docs/DEPENDENCY_AUDIT.md) and [release checklist](docs/RELEASE_CHECKLIST.md) and [security review checklist](docs/SECURITY_REVIEW.md).
