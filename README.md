@@ -25,7 +25,7 @@ PDF and Office-document analysis are not part of the current upload flow.
 
 GitHub Actions runs `npm ci`, a full dependency-audit summary, a blocking production dependency audit, TypeScript checking and a Vite build. The production audit gate is `npm audit --omit=dev --audit-level=low`.
 
-The latest full-tree npm audit run (#67) reported 3 moderate findings in development/build tooling; an earlier run reported 7 (5 high, 2 moderate). The production-only audit gate passed with zero vulnerabilities in run #67, but this does not mean the entire dependency tree is audit-free. See [the dependency audit record](docs/DEPENDENCY_AUDIT.md).
+The latest full-tree npm audit run (#81, October 24, 2026) reported 3 moderate findings and 0 high/critical findings in development/build tooling. The production-only audit gate passed with zero vulnerabilities in the same run. CI now also guards the patched PostCSS selector-parser version floor and the AppDeploy-required Tailwind CSS 3 major version. npm audit still reports the moderate entries because its advisory metadata has not yet acknowledged the selector-parser 6.1.5 backport; this is not described as an audit-free dependency tree. See [the dependency audit record](docs/DEPENDENCY_AUDIT.md).
 
 The CI build sets `EL_ROUJI_CI_BUILD=1` to use a **build-only shim** for the AppDeploy-provided `@appdeploy/client` module. That shim is not a functional substitute for hosted authentication or image processing and its output must not be deployed.
 
