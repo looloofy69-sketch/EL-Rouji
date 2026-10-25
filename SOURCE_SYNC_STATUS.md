@@ -45,3 +45,12 @@ GitHub main now contains security PR #17 and its UI follow-up PR #19. The route 
 - Complete hosted QA for research, auth/account isolation, history deletion, attachments and multilingual mobile/RTL rendering.
 - Review backend authorization, input validation, rate limiting, privacy/retention and rollback procedure.
 - No release tag has been created; the release checklist remains incomplete.
+
+
+## Repository recheck — 25 October 2026
+
+- Reviewed GitHub `main` HEAD: `e08fbc8fea12b37cd013f5f09a1a7d51e8361299`.
+- Latest main CI run checked: [#94](https://github.com/looloofy69-sketch/EL-Rouji/actions/runs/40099475237), successful. It ran locked install, dependency audit summary, production audit, URL-safety regression tests, typecheck and Vite build using the CI-only shim. Full-tree audit count: 3 moderate, 0 high, 0 critical; production-only audit: 0.
+- GitHub main's direct-URL research guard is source/CI verified, not confirmed active in AppDeploy. The last documented verified hosted snapshot remains `1792755107550`; do not claim the guard is deployed until a controlled host validation and live test pass.
+- Open issues #9 (dev-tool advisories/host compatibility) and #13 (public endpoint abuse controls / URL-fetch protections) remain open. Four open Dependabot PRs (#4–#7) contain dependency upgrades awaiting compatibility review. No release is recorded.
+- The planned Algeria-specific RAG, Darija model adaptation, edge inference, OCR, voice, OSM, code sandbox, LSP and payment simulation are described in [docs/ALGERIA_CENTRIC_ENGINE_ROADMAP.md](docs/ALGERIA_CENTRIC_ENGINE_ROADMAP.md); they are not implemented by this documentation update.
