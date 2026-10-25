@@ -24,7 +24,7 @@ jobs:
       - name: Check patched selector-parser and AppDeploy Tailwind floors
         run: node scripts/check-dependency-security.mjs
       - name: Run URL safety regression tests
-        run: node --experimental-strip-types --test tests/url-safety.test.mjs
+        run: node --experimental-strip-types --test tests/*.test.mjs
       - name: Dependency audit summary
         continue-on-error: true
         run: |
