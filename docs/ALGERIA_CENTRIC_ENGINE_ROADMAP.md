@@ -103,6 +103,8 @@ Start with a narrow public-information scope, such as selected official business
 - Create a hand-reviewed evaluation set across Arabic, French, Arabic-script Darija, Latin-script Darija and code-switching. Include ambiguity, outdated-law traps, missing-source cases, conflicting sources and requests outside the corpus.
 - Do not use private user conversations as training/evaluation data without a separate explicit, informed opt-in, minimization, retention policy and review.
 
+**Initial repository scaffold on this branch:** [source manifest](../data/legal-rag/source-manifest.json), [evaluation set](../data/legal-rag/evaluation-set.json), [source manifest schema](../schemas/legal-rag-source-manifest.schema.json), [evaluation schema](../schemas/legal-rag-evaluation-set.schema.json), and [dataset admission guide](LEGAL_RAG_DATASET_GUIDE.md). The two JSON containers are intentionally empty. These schemas have not yet been wired into automated CI validation and do not establish a usable corpus or retrieval engine.
+
 **Proposed passage metadata contract:**
 
 | Field | Purpose |
