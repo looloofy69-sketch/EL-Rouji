@@ -45,3 +45,20 @@ GitHub main now contains security PR #17 and its UI follow-up PR #19. The route 
 - Complete hosted QA for research, auth/account isolation, history deletion, attachments and multilingual mobile/RTL rendering.
 - Review backend authorization, input validation, rate limiting, privacy/retention and rollback procedure.
 - No release tag has been created; the release checklist remains incomplete.
+
+## Deployment and source reconciliation — 25 October 2026
+
+A fresh read-only AppDeploy status and stored-source inspection supersedes the older snapshot number recorded in the 24 October entries above.
+
+- **App:** `el-rouji-70120b`
+- **Reported status:** `ready`
+- **Live URL:** https://el-rouji-70120b.v2.appdeploy.ai/
+- **Reported deployed snapshot:** `1792849620557`
+- **Latest returned QA snapshot timestamp:** `1792849641837`
+- **Reported QA errors:** no frontend errors, network errors, or backend errors. This status result is not a fresh end-to-end test of every route or user journey.
+- **Stored source inventory:** includes `backend/index.ts` and `backend/url-safety.ts`; the helper source is byte-for-byte aligned with GitHub `main`. The backend handler has the same non-blank source lines in the inspected content, with one blank-line difference around the research source-bundle section. No behavioral difference was identified in that whitespace discrepancy.
+- **Research safety:** stored deployed source contains the direct HTTP(S) query rejection and retains query-based Tavily search. Keep direct page scraping disabled until DNS resolution, redirect, and destination-address controls are independently verified.
+- **Cost-control/security follow-up:** source inspection found no route-local `requireAuth()` on `POST /api/chat`, `POST /api/research`, `POST /api/analyze-image`, or `POST /api/analyze-document`. This alone does not prove that edge/platform controls are absent. GitHub issue [#23](https://github.com/looloofy69-sketch/EL-Rouji/issues/23) tracks the explicit decision between authenticated-only use and anonymous access with server-enforced quotas, concurrency limits, and spend controls.
+
+This entry records source/status observations only. No AppDeploy source write, deployment, or live request was performed for this reconciliation. Do not treat the issue as resolved until policy tests pass and the tested source is deployed and rechecked.
+
