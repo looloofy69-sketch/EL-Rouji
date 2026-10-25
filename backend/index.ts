@@ -1,5 +1,6 @@
 import { ai, error, json, requireAuth, router, secrets, storage } from '@appdeploy/sdk';
 import { safeHttpUrl } from './url-safety.ts';
+import { isDirectUrlResearchQuery } from './research-input.ts';
 
 type ChatMessage = { role: 'user' | 'assistant'; content: string };
 type SourceLink = { title: string; url: string; snippet: string; domain: string; publishedAt?: string };
@@ -164,7 +165,7 @@ export const handler = router({
       // Direct URL fetching is temporarily disabled until the hosted scraper's DNS,
       // redirect, and destination-address protections have been verified. A syntax
       // validator cannot prove that a remote fetch is safe against DNS rebinding.
-      if (/^https?:\/\//i.test(query)) {
+      if (isDirectUrlResearchQuery(query) {
         return error('Direct page scraping is temporarily disabled while destination and redirect security is verified. Enter a research question instead; source links will be provided where available.', 400);
       }
 
