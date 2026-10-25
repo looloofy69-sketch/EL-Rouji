@@ -1,6 +1,6 @@
 # EL-Rouji Ecosystem — Repository Boundaries and Readiness
 
-**Snapshot date:** 24 October 2026  
+**Snapshot date:** 25 October 2026  
 **Purpose:** one source-of-truth map for the EL-Rouji project repositories.
 
 This document excludes unrelated projects. Repository contents and CI were inspected for this snapshot; a green GitHub build is not proof of successful hosted end-to-end behavior.
@@ -17,9 +17,9 @@ This document excludes unrelated projects. Repository contents and CI were inspe
 
 ## Core application status
 
-Current source uses React, TypeScript, Vite, Tailwind CSS 3, and an AppDeploy backend. The documented routes include health, chat, research, image/document analysis, and account-protected conversation sync. Direct HTTP(S) page scraping has been removed from GitHub main until the hosted fetcher's destination/redirect protections are verified; query-based search remains available. Core main commit `28db184` passed CI run #92 after the direct URL research guard and the EN/FR/AR UI correction. The live AppDeploy version has not been updated or validated after these changes. The full dependency-tree audit reports three moderate build-tool advisory entries, while the production-only audit reports zero. A clean production-only audit is not a clean full dependency tree, and the source change has not been deployed to AppDeploy.
+Current source uses React, TypeScript, Vite, Tailwind CSS 3, and an AppDeploy backend. The documented routes include health, chat, research, image/document analysis, and account-protected conversation sync. Direct HTTP(S) page scraping has been removed from GitHub main until the hosted fetcher's destination/redirect protections are verified; query-based search remains available. Core main commit `e08fbc8` passed [CI run #94](https://github.com/looloofy69-sketch/EL-Rouji/actions/runs/40099475237), including locked install, dependency audit summary (3 moderate, 0 high/critical), production-only audit (0), URL-safety regression tests, typecheck and frontend build with the CI-only shim. The live AppDeploy version has not been updated or validated after these changes. The full dependency-tree audit reports three moderate build-tool advisory entries, while the production-only audit reports zero. A clean production-only audit is not a clean full dependency tree, and the source change has not been deployed to AppDeploy.
 
-Open release blockers are tracked in [Next-mile readiness](NEXT_MILE_READINESS.md), [QA plan](QA_TEST_PLAN.md), [security review](SECURITY_REVIEW.md), [dependency audit](DEPENDENCY_AUDIT.md), and [Issue #9](https://github.com/looloofy69-sketch/EL-Rouji/issues/9). Do not create a release tag until the release checklist is supported by test evidence and explicit risk decisions.
+Open release blockers are tracked in [Next-mile readiness](NEXT_MILE_READINESS.md), [QA plan](QA_TEST_PLAN.md), [security review](SECURITY_REVIEW.md), [dependency audit](DEPENDENCY_AUDIT.md), the [Algeria-centric engine roadmap](ALGERIA_CENTRIC_ENGINE_ROADMAP.md), [Issue #9](https://github.com/looloofy69-sketch/EL-Rouji/issues/9), and [Issue #13](https://github.com/looloofy69-sketch/EL-Rouji/issues/13). Do not create a release tag until the release checklist is supported by test evidence and explicit risk decisions.
 
 The open Dependabot changes are separate proposals, not automatic approval to upgrade. Major changes must be evaluated against the actual AppDeploy build boundary. Tailwind CSS 4 already failed the hosted platform's CSS validation in an earlier trial; keep Tailwind CSS 3 until a compatible hosted path is demonstrated.
 
