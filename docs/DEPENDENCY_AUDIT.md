@@ -4,7 +4,7 @@
 
 ## Latest observed audit
 
-GitHub Actions run **#81** on October 24, 2026 reconfirmed **3 moderate, 0 high, 0 critical** advisory entries in the full dependency tree (the prior baseline was run #67 on October 23). The latest reported packages were:
+GitHub Actions main run **#94** on October 24, 2026 reconfirmed **3 moderate, 0 high, 0 critical** advisory entries in the full dependency tree (the prior documented baseline was run #81). The latest reported packages were:
 
 - `postcss-nested` (moderate; reported via `postcss-selector-parser`)
 - `postcss-selector-parser` (moderate)
@@ -12,7 +12,7 @@ GitHub Actions run **#81** on October 24, 2026 reconfirmed **3 moderate, 0 high,
 
 The production-only audit in the same run (`npm audit --omit=dev --audit-level=low`) returned **0 vulnerabilities** and passed the blocking CI step.
 
-An earlier CI run (#38) reported 7 advisories (5 high, 2 moderate). The count and severity returned by npm's audit metadata can change as advisory feeds are updated even when the package lockfile does not change. Run #67 is the latest observed result for the current Tailwind 3 lockfile, not a claim that the full dependency tree has no findings.
+An earlier CI run (#38) reported 7 advisories (5 high, 2 moderate). The count and severity returned by npm's audit metadata can change as advisory feeds are updated even when the package lockfile does not change. Run #94 is the latest rechecked result for the current Tailwind 3 lockfile, not a claim that the full dependency tree has no findings. See the [CI run log](https://github.com/looloofy69-sketch/EL-Rouji/actions/runs/40099475237).
 
 ## Findings and disposition
 
