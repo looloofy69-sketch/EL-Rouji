@@ -165,7 +165,7 @@ export const handler = router({
       // Direct URL fetching is temporarily disabled until the hosted scraper's DNS,
       // redirect, and destination-address protections have been verified. A syntax
       // validator cannot prove that a remote fetch is safe against DNS rebinding.
-      if (isDirectUrlResearchQuery(query) {
+      if (isDirectUrlResearchQuery(query)) {
         return error('Direct page scraping is temporarily disabled while destination and redirect security is verified. Enter a research question instead; source links will be provided where available.', 400);
       }
 
