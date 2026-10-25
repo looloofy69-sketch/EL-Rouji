@@ -22,7 +22,7 @@ This is an initial threat review, not a completed security audit. Items marked "
 
 - The repository's CI shim is not a real SDK implementation and must never be deployed.
 - AppDeploy's current template validator rejects the tested Tailwind CSS 4 CSS entry; the live app was restored to the last-known-good Tailwind CSS 3 version.
-- The latest full dependency audit (run #81, October 24, 2026) reports 3 moderate development/build-tool advisory entries and 0 high/critical findings; the production-only audit passed with zero findings. The lockfile resolves postcss-selector-parser 6.1.5, which upstream documents as the 6.x backport of the quadratic-parsing fix; CI now guards that version floor and the Tailwind 3 baseline. npm audit still reports the older advisory range, so the metadata mismatch remains visible and the full tree is not claimed to be audit-free.
+- The latest rechecked full dependency audit (main CI run #94, October 24, 2026) reports 3 moderate development/build-tool advisory entries and 0 high/critical findings; the production-only audit passed with zero findings. The lockfile resolves postcss-selector-parser 6.1.5, which upstream documents as the 6.x backport of the quadratic-parsing fix; CI now guards that version floor and the Tailwind 3 baseline. npm audit still reports the older advisory range, so the metadata mismatch remains visible and the full tree is not claimed to be audit-free.
 - This review does not certify regulatory compliance, data residency, backups, rate limiting, monitoring or any SLA.
 
 ## Minimum evidence before broad public rollout
@@ -34,3 +34,15 @@ This is an initial threat review, not a completed security audit. Items marked "
 - [ ] Deploy the direct-URL-scraping safeguard through AppDeploy only after validating that the backend compiles with the new URL helper; confirm that direct URL input is rejected in the hosted app and normal search-based research still works.
 - [ ] Review dependency audit output and record risk acceptance/remediation in issue #9.
 - [ ] Test a real AppDeploy rollback and record the prior version ID.
+
+
+## Additional controls required before Algeria-centric RAG
+
+- [ ] Limit the initial corpus to reviewed, legitimate-to-reuse official sources and preserve source URL, document/article identity, publication/effective dates, status, checksum and parser quality.
+- [ ] Treat every retrieved passage as untrusted evidence; ignore instructions embedded in documents, prevent context mixing, and bind generated citations to actual retrieved passage IDs.
+- [ ] Filter stale/superseded material where source metadata supports it; explicitly disclose unknown legal status and abstain when current authority cannot be verified.
+- [ ] Keep corpus-ingestion credentials and provider keys server-side; do not index private chat histories or private uploads into a shared corpus by default.
+- [ ] Add strict input/context/result limits, quotas and per-request cost/time bounds before exposing retrieval to public endpoints.
+- [ ] Test injection-like source text, missing and conflicting sources, fabricated citation attempts, stale texts, multilingual variants, source refresh rollback and cache isolation.
+- [ ] Document corpus retention and refresh policy, data-use rights, logging minimization and the process for correcting/removing a bad source.
+- [ ] Keep the pilot offline/opt-in until issue #13 endpoint controls and live deployment behavior are verified.

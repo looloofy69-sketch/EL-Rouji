@@ -4,7 +4,7 @@
 
 Research mode uses a server-side Tavily search integration when `TAVILY_API_KEY` is configured in AppDeploy's secure backend settings. Never put the key in frontend variables, public commits, screenshots, or issue reports. A secret entry being configured does not prove the credential is valid; run an end-to-end search test after configuration.
 
-Direct HTTP(S) page URL scraping is temporarily disabled while AppDeploy's destination-address, DNS-resolution, and redirect protections are verified. Search-based research remains supported; the UI explains the restriction in English, French, and Arabic. This source change is not live until a separate AppDeploy deployment is validated.
+GitHub `main` rejects direct HTTP(S) page URLs before a remote fetch, and URL-safety regressions pass CI. This source change is **not confirmed live**: the last documented verified AppDeploy snapshot remains `1792755107550`. A controlled AppDeploy compile/deploy and live rejection plus normal-search regression test are still required.
 
 ## AppDeploy
 
@@ -13,6 +13,10 @@ The current hosted app uses AppDeploy for deployment, backend endpoints, authent
 ## Conversation sync
 
 The interface offers optional account-based sync. Test sign-in, read/write access, account isolation, sign-out behavior, and deletion semantics before depending on it for sensitive or multi-user use.
+
+## Planned integrations — not implemented
+
+The [Algeria-centric engine roadmap](ALGERIA_CENTRIC_ENGINE_ROADMAP.md) scopes these as future candidates, not current integrations: official-source Legal/Administrative RAG; a vector-search store such as PostgreSQL/pgvector if supported by the host; ONNX Runtime Web or WebAssembly for selected local tasks; Darija evaluation/adaptation; OCR and PDF/Office parsing; speech-to-text/text-to-speech; OpenStreetMap-powered features; isolated code execution; LSP workspace support; and mock payment-gateway responses. None is implemented or confirmed available in the current AppDeploy environment by this repository check.
 
 ## Current limitations
 

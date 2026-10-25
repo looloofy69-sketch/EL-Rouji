@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/looloofy69-sketch/EL-Rouji/blob/main/schemas/legal-rag-source-manifest.schema.json",
+  "title": "EL-Rouji legal/administrative source manifest",
+  "description": "Metadata contract for provenance-reviewed public-source documents. It does not contain source text or prove legal validity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "sources"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_id",
+          "source_url",
+          "publisher",
+          "title",
+          "document_type",
+          "jurisdiction",
+          "language",
+          "script",
+          "retrieved_at",
+          "sha256",
+          "reuse",
+          "verification_status",
+          "quality_flags"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]{2,119}$"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "publisher": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "document_type": {
+            "enum": [
+              "journal_officiel",
+              "law_or_regulation",
+              "government_guidance",
+              "official_form",
+              "public_service_page",
+              "other"
+            ]
+          },
+          "jurisdiction": {
+            "const": "DZ"
+          },
+          "topic": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "uniqueItems": true
+          },
+          "language": {
+            "enum": [
+              "ar",
+              "fr",
+              "en",
+              "mixed",
+              "unknown"
+            ]
+          },
+          "script": {
+            "enum": [
+              "arabic",
+              "latin",
+              "mixed",
+              "unknown"
+            ]
+          },
+          "publication_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "effective_from": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "effective_to": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "document_status": {
+            "enum": [
+              "in_force",
+              "partially_amended",
+              "repealed",
+              "unknown",
+              "not_applicable"
+            ]
+          },
+          "version_label": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "retrieved_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "reuse": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "basis",
+              "note"
+            ],
+            "properties": {
+              "basis": {
+                "enum": [
+                  "open_license",
+                  "official_publication_terms_reviewed",
+                  "permission",
+                  "metadata_only",
+                  "review_required"
+                ]
+              },
+              "evidence_url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            }
+          },
+          "verification_status": {
+            "enum": [
+              "pending",
+              "reviewed",
+              "approved",
+              "retired"
+            ]
+          },
+          "quality_flags": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "date_unverified",
+                "status_unverified",
+                "supersession_unverified",
+                "partial_parse",
+                "ocr_unreviewed",
+                "language_uncertain",
+                "url_unverified",
+                "reuse_review_required"
+              ]
+            }
+          },
+          "sections": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "maxLength": 240
+            }
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 3000
+          }
+        }
+      }
+    }
+  }
+}

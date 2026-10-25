@@ -1,6 +1,6 @@
 # Next-mile readiness plan
 
-**Last updated:** October 23, 2026. Verified items are separated from work still requiring hosted QA or an owner decision.
+**Last updated:** October 25, 2026. State below was rechecked against main commit `e08fbc8` and CI run #94; source checks and hosted behavior are deliberately separated. Verified items are separated from work still requiring hosted QA or an owner decision.
 
 ## Product baseline
 
@@ -15,11 +15,11 @@ Current upload support is PNG, JPEG, WebP, TXT, MD, CSV and JSON. PDF/DOCX/XLSX 
 | AppDeploy source imported | Verified | Source snapshot `1792755107550` copied to GitHub; representative files fetched back. |
 | npm lockfile | Verified | `package-lock.json` committed; `npm ci` passes in GitHub Actions. |
 | TypeScript and frontend bundle | Verified in GitHub Actions | Uses the CI-only shim for AppDeploy's injected client module. |
-| Production dependency audit | Hard gate added | CI runs `npm audit --omit=dev --audit-level=low`; passed in run #67 on PR #11's tested tree, which was merged to main. |
-| Full development-tree audit | Outstanding risk | Latest run #67 reported 3 moderate; earlier run #38 reported 7 (5 high, 2 moderate). Production-only audit was clean. See `docs/DEPENDENCY_AUDIT.md`. |
+| Production dependency audit | Hard gate added | CI run [#94](https://github.com/looloofy69-sketch/EL-Rouji/actions/runs/40099475237) passed `npm audit --omit=dev --audit-level=low`; zero production dependency vulnerabilities were reported. |
+| Full development-tree audit | Outstanding risk | Main CI run #94 reported 3 moderate, 0 high, 0 critical. The production-only audit returned zero. See `docs/DEPENDENCY_AUDIT.md`; a clean production audit is not a clean full dependency tree. |
 | Tailwind 4 migration | Blocked by hosted template | AppDeploy validator rejected `@import "tailwindcss";`. PR #10 was closed without merge. |
 | Live deployment recovery | Verified | Failed trial was rolled back to AppDeploy version `1792755107550`; status returned to `ready`. |
-| Hosted authentication/account sync | Not verified by this repository work | Requires live tests with separate synthetic accounts. |
+| Research URL-scrape safeguard | Source/CI verified; not verified live | Main commit `e08fbc8` includes the direct-URL rejection and URL-safety regressions. The AppDeploy snapshot remains `1792755107550`; compile/deploy/live rejection and normal-search regression still require controlled verification. |\n| Hosted authentication/account sync | Not verified by this repository work | Requires live tests with separate synthetic accounts. |
 | Research/Tavily | Not verified end-to-end | Secure secret configuration alone does not prove provider calls work. |
 | Backend security/privacy | Incomplete review | API authorization, input validation, retention/deletion and abuse controls need dedicated testing. |
 | Release | Not ready | Product smoke tests, full build-tool audit risk decision and hosted runtime checks are incomplete; no version tag exists. |
@@ -50,6 +50,10 @@ Current upload support is PNG, JPEG, WebP, TXT, MD, CSV and JSON. PDF/DOCX/XLSX 
 - Keep rollback target documented and verify that a rollback reaches `ready`.
 - Resolve or formally accept the development-tool advisory risk.
 - Create a release tag only after `docs/RELEASE_CHECKLIST.md` is complete.
+
+## Algeria-centric engine direction
+
+The [Algeria-centric engine roadmap](ALGERIA_CENTRIC_ENGINE_ROADMAP.md) consolidates the proposed Legal/Administrative RAG pilot, official-source metadata, multilingual evaluation, runtime options, low-bandwidth work, OCR/voice/maps and developer-tool ideas. These are plans, not implemented features. The first new domain feature remains gated by issue #13, dependency-risk disposition in issue #9, and hosted validation. No new database, model host or local ONNX runtime has been confirmed available in AppDeploy.
 
 ## Scope caution
 

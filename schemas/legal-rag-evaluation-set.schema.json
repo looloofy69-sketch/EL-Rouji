@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/looloofy69-sketch/EL-Rouji/blob/main/schemas/legal-rag-evaluation-set.schema.json",
+  "title": "EL-Rouji Legal/Administrative RAG evaluation set",
+  "description": "Curated test questions and expected behavior. Do not populate with private user conversations or unreviewed legal answers.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "corpus_version",
+    "cases"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "corpus_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "question",
+          "language",
+          "script",
+          "category",
+          "expected_behavior",
+          "expected_source_ids",
+          "review_status"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]{2,119}$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "language": {
+            "enum": [
+              "ar",
+              "fr",
+              "en",
+              "mixed",
+              "unknown"
+            ]
+          },
+          "script": {
+            "enum": [
+              "arabic",
+              "latin",
+              "mixed",
+              "unknown"
+            ]
+          },
+          "category": {
+            "enum": [
+              "administrative_procedure",
+              "business",
+              "tax",
+              "employment",
+              "social_services",
+              "consumer",
+              "general_law",
+              "out_of_scope",
+              "other"
+            ]
+          },
+          "expected_behavior": {
+            "enum": [
+              "answer_with_citations",
+              "abstain",
+              "ask_clarifying_question"
+            ]
+          },
+          "expected_source_ids": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "must_disclose": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "maxLength": 500
+            }
+          },
+          "forbidden_claims": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "maxLength": 500
+            }
+          },
+          "review_status": {
+            "enum": [
+              "draft",
+              "reviewed",
+              "approved",
+              "retired"
+            ]
+          },
+          "reviewer_pseudonym": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        }
+      }
+    }
+  }
+}

@@ -12,6 +12,17 @@ This is a proposal for sequencing future work, not a statement that these items 
 - [ ] Complete desktop/mobile smoke testing for Arabic RTL, French and English.
 - [ ] Review authentication, authorization, attachment validation, privacy, retention/deletion and calculator parsing.
 
+## Algeria-centric engine direction — planned, not implemented
+
+The detailed phase gates, evidence requirements, candidate-stack decisions and acceptance tests live in [ALGERIA_CENTRIC_ENGINE_ROADMAP.md](ALGERIA_CENTRIC_ENGINE_ROADMAP.md). The initial empty [source manifest](../data/legal-rag/source-manifest.json), [evaluation set](../data/legal-rag/evaluation-set.json), JSON Schemas under `schemas/`, and [dataset guide](LEGAL_RAG_DATASET_GUIDE.md) establish a data contract only; no corpus has been ingested, schema validator added, or RAG runtime implemented. The priority order is:
+
+1. Resolve the existing live security/deployment verification in [issue #13](https://github.com/looloofy69-sketch/EL-Rouji/issues/13) and document the full-tree dependency risk in [issue #9](https://github.com/looloofy69-sketch/EL-Rouji/issues/9).
+2. Build an official-source inventory and a consent-/license-aware multilingual evaluation set.
+3. Prototype source-grounded legal/administrative retrieval offline, with passage-level citations, date/version metadata and safe abstention.
+4. Evaluate low-bandwidth browser work, Darija adaptations, OCR, voice, maps, sandboxing and API simulation as separate modules only after measured needs justify them.
+
+No RAG service, database, fine-tuned model, custom tokenizer, OCR, voice service, payment simulator, or ONNX edge runtime is claimed to exist today. Do not select a new database or migrate the application stack before verifying hosting compatibility and benchmarking a scoped prototype.
+
 ## Reliability and usability
 
 - [ ] Add automated tests for API validation and important frontend flows.
