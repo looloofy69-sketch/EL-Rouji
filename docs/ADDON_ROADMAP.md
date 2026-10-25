@@ -14,7 +14,7 @@ This is a proposal for sequencing future work, not a statement that these items 
 
 ## Algeria-centric engine direction — planned, not implemented
 
-The detailed phase gates, evidence requirements, candidate-stack decisions and acceptance tests live in [ALGERIA_CENTRIC_ENGINE_ROADMAP.md](ALGERIA_CENTRIC_ENGINE_ROADMAP.md). The priority order is:
+The detailed phase gates, evidence requirements, candidate-stack decisions and acceptance tests live in [ALGERIA_CENTRIC_ENGINE_ROADMAP.md](ALGERIA_CENTRIC_ENGINE_ROADMAP.md). The initial empty [source manifest](../data/legal-rag/source-manifest.json), [evaluation set](../data/legal-rag/evaluation-set.json), JSON Schemas under `schemas/`, and [dataset guide](LEGAL_RAG_DATASET_GUIDE.md) establish a data contract only; no corpus has been ingested, schema validator added, or RAG runtime implemented. The priority order is:
 
 1. Resolve the existing live security/deployment verification in [issue #13](https://github.com/looloofy69-sketch/EL-Rouji/issues/13) and document the full-tree dependency risk in [issue #9](https://github.com/looloofy69-sketch/EL-Rouji/issues/9).
 2. Build an official-source inventory and a consent-/license-aware multilingual evaluation set.
