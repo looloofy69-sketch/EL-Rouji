@@ -19,15 +19,21 @@ test("rejects local and special-use hostnames, including trailing-dot variants",
   for (const value of [
     "http://localhost/",
     "http://localhost./",
+    "http://localhost../",
     "http://api.localhost/",
+    "http://api.localhost../",
     "http://router.local/",
+    "http://router.local../",
     "http://metadata.google.internal/",
     "http://metadata/",
+    "http://metadata../",
     "http://instance-data.ec2.internal/",
     "http://host.docker.internal/",
+    "http://host.docker.internal../",
     "http://printer.test/",
     "http://host.invalid/",
     "http://site.example/",
+    "http://site.example../",
   ]) {
     assert.equal(safeHttpUrl(value), null, value);
   }
