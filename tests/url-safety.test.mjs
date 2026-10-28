@@ -8,6 +8,10 @@ test("accepts ordinary HTTP(S) source URLs", () => {
   assert.equal(safeHttpUrl("http://neverssl.com/")?.protocol, "http:");
 });
 
+test("accepts a single trailing dot on a public DNS hostname", () => {
+  assert.equal(safeHttpUrl("https://example.org./")?.hostname, "example.org.");
+});
+
 test("rejects non-HTTP schemes, credentials and oversized inputs", () => {
   assert.equal(safeHttpUrl("file:///etc/passwd"), null);
   assert.equal(safeHttpUrl("javascript:alert(1)"), null);
@@ -19,15 +23,21 @@ test("rejects local and special-use hostnames, including trailing-dot variants",
   for (const value of [
     "http://localhost/",
     "http://localhost./",
+    "http://localhost../",
     "http://api.localhost/",
+    "http://api.localhost../",
     "http://router.local/",
+    "http://router.local../",
     "http://metadata.google.internal/",
     "http://metadata/",
+    "http://metadata../",
     "http://instance-data.ec2.internal/",
     "http://host.docker.internal/",
+    "http://host.docker.internal../",
     "http://printer.test/",
     "http://host.invalid/",
     "http://site.example/",
+    "http://site.example../",
   ]) {
     assert.equal(safeHttpUrl(value), null, value);
   }
