@@ -8,6 +8,10 @@ test("accepts ordinary HTTP(S) source URLs", () => {
   assert.equal(safeHttpUrl("http://neverssl.com/")?.protocol, "http:");
 });
 
+test("accepts a single trailing dot on a public DNS hostname", () => {
+  assert.equal(safeHttpUrl("https://example.org./")?.hostname, "example.org.");
+});
+
 test("rejects non-HTTP schemes, credentials and oversized inputs", () => {
   assert.equal(safeHttpUrl("file:///etc/passwd"), null);
   assert.equal(safeHttpUrl("javascript:alert(1)"), null);
