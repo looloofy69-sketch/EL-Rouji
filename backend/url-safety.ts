@@ -20,9 +20,10 @@ export function safeHttpUrl(value: unknown): URL | null {
 
     if (!unbracketedHost) return null;
 
-    // Reject local/special-use names. Trailing dots are valid DNS syntax and
-    // must not bypass suffix checks.
+    // A single trailing dot is valid DNS syntax. Reject repeated trailing
+    // dots so malformed names cannot bypass local/special-use suffix checks.
     const dnsHost = unbracketedHost.replace(/\.$/, "");
+    if (!dnsHost || dnsHost.endsWith(".")) return null;
     if (
       dnsHost === "localhost" ||
       dnsHost.endsWith(".localhost") ||
